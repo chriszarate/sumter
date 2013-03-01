@@ -11,31 +11,49 @@
       // Title text
       title: 'Sumter',
       // RegExes describing positive and negative number-like strings
-      // ['symbol', [/positive/], [/negative/]]
       regexes: [
-        ['$',
-          [/^\$\.?[0-9][0-9,\.]*$/],
-          [/^\(\$\.?[0-9][0-9,\.]*\)$/, /^[\-–]\$\.?[0-9][0-9,\.]*$/]
-        ],
-        ['£',
-          [/^£\.?[0-9][0-9,\.]*$/],
-          [/^\(£\.?[0-9][0-9,\.]*\)$/, /^[\-–]£\.?[0-9][0-9,\.]*$/]
-        ],
-        ['€',
-          [/^€\.?[0-9][0-9,\.]*$/],
-          [/^\(€\.?[0-9][0-9,\.]*\)$/, /^[\-–]€\.?[0-9][0-9,\.]*$/]
-        ],
-        ['¥',
-          [/^\.?[0-9][0-9,\.]*¥$/, /^¥\.?[0-9][0-9,\.]*$/],
-          [/^\(\.?[0-9][0-9,\.]*¥\)$/, /^[\-–]\.?[0-9][0-9,\.]*¥$/, /^\(¥\.?[0-9][0-9,\.]*\)$/, /^[\-–]¥\.?[0-9][0-9,\.]*$/]
-        ],
-        ['',
-          [/^\.?[0-9][0-9,\.]*$/],
-          [/^\(\.?[0-9][0-9,\.]+\)$/, /^[\-–]\.?[0-9][0-9,\.]+$/]
-        ]
+        {
+          show: '$', // Dollar
+          pos: [/^\$\.?[0-9][0-9,\.]*$/],
+          neg: [/^\(\$\.?[0-9][0-9,\.]*\)$/, /^[\-–]\$\.?[0-9][0-9,\.]*$/]
+        },
+        {
+          show: '£', // Pound
+          pos: [/^£\.?[0-9][0-9,\.]*$/],
+          neg: [/^\(£\.?[0-9][0-9,\.]*\)$/, /^[\-–]£\.?[0-9][0-9,\.]*$/]
+        },
+        {
+          show: '€', // Euro
+          pos: [/^€\.?[0-9][0-9,\.]*$/],
+          neg: [/^\(€\.?[0-9][0-9,\.]*\)$/, /^[\-–]€\.?[0-9][0-9,\.]*$/]
+        },
+        {
+          show: '¥', // Yen
+          pos: [/^\.?[0-9][0-9,\.]*¥[\.,]?$/, /^¥\.?[0-9][0-9,\.]*$/],
+          neg: [/^\(\.?[0-9][0-9,\.]*¥[\.,]?\)$/, /^[\-–]\.?[0-9][0-9,\.]*¥[\.,]?$/, /^\(¥\.?[0-9][0-9,\.]*\)$/, /^[\-–]¥\.?[0-9][0-9,\.]*$/]
+        },
+        {
+          show: '', // plain numbers
+          pos: [/^\.?[0-9][0-9,\.]*$/],
+          neg: [/^\(\.?[0-9][0-9,\.]+\)$/, /^[\-–]\.?[0-9][0-9,\.]+$/]
+        }
       ],
       // Number of decimals to round to
-      round: 2
+      round: 2,
+      // CSS styles for total box.
+      styles: [
+        'position: fixed;',
+        'top: 0;',
+        'right: 20px;',
+        'padding: 5px 10px;',
+        'color: #333;',
+        'background-color: #ff0;',
+        'font-family: Helvetica, Arial, sans-serif;',
+        'font-weight: bold;',
+        'font-size: 16px;',
+        'opacity: 0.9;',
+        'z-index: 9999;'
+      ]
     },
     // Placeholder for current selection
     selection: {},
@@ -43,23 +61,9 @@
     totals: ''
   };
 
-  // Styles for total box.
-  var styles = [
-    'position: fixed;',
-    'top: 0;',
-    'right: 20px;',
-    'padding: 5px 10px;',
-    'color: #333;',
-    'background-color: #ff0;',
-    'font-family: Helvetica, Arial, sans-serif;',
-    'font-weight: bold;',
-    'font-size: 16px;',
-    'opacity: 0.9;'
-  ];
-
   // Make a little total box that's easy to find.
   var styleAttr = document.createAttribute('style');
-      styleAttr.value = styles.join('');
+      styleAttr.value = sumter.config.styles.join('');
   var sumterDialog = document.createElement('div');
       sumterDialog.setAttributeNode(styleAttr);
       sumterDialog.appendChild(document.createTextNode(sumter.config.title));
@@ -122,15 +126,15 @@
     for(var i = 0, sum = 0; i < arr.length; i++) {
       for(var j = 0; j < sumter.config.regexes.length; j++) {
         if(typeof totals[j] === 'undefined') totals[j] = [];
-        for(var k = 0, alive = true; alive && k < sumter.config.regexes[j][1].length; k++) {
-          if(sumter.config.regexes[j][1][k].test(arr[i])) {
+        for(var k = 0, alive = true; alive && k < sumter.config.regexes[j].pos.length; k++) {
+          if(sumter.config.regexes[j].pos[k].test(arr[i])) {
             totals[j].push(parseFloat(arr[i].replace(/[^0-9\.]/g, '')));
             alive = false;
             break;
           }
         }
-        for(var l = 0; alive && l < sumter.config.regexes[j][2].length; l++) {
-          if(sumter.config.regexes[j][2][l].test(arr[i])) {
+        for(var l = 0; alive && l < sumter.config.regexes[j].neg.length; l++) {
+          if(sumter.config.regexes[j].neg[l].test(arr[i])) {
             totals[j].push((0 - parseFloat(arr[i].replace(/[^0-9\.]/g, ''))));
             break;
           }
@@ -163,7 +167,7 @@
       var len = arr[i].length;
       if(len) {
         for(var j = 0, sum = 0; j < len; j++) sum += arr[i][j];
-        totals.push(sumter.config.regexes[i][0] + roundNumber(sum));
+        totals.push(sumter.config.regexes[i].show + roundNumber(sum));
         total += sum;
       }
     }
