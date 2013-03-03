@@ -172,7 +172,7 @@
       var len = arr[i].length;
       if(len) {
         for(var j = 0, sum = 0; j < len; j++) sum += arr[i][j];
-        totals.push(sumter.config.regexes[i].showBefore + roundNumber(sum)) + sumter.config.regexes[i].showAfter;
+        totals.push(sumter.config.regexes[i].showBefore + roundNumber(sum) + sumter.config.regexes[i].showAfter);
         total += sum;
       }
     }
