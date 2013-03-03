@@ -13,27 +13,32 @@
       // RegExes describing positive and negative number-like strings
       regexes: [
         {
-          show: '$', // Dollar
+          showBefore: '$', // Dollar
+          showAfter: '',
           pos: [/^\$\.?[0-9][0-9,\.]*$/],
           neg: [/^\(\$\.?[0-9][0-9,\.]*\)$/, /^[\-–]\$\.?[0-9][0-9,\.]*$/]
         },
         {
-          show: '£', // Pound
+          showBefore: '£', // Pound
+          showAfter: '',
           pos: [/^£\.?[0-9][0-9,\.]*$/],
           neg: [/^\(£\.?[0-9][0-9,\.]*\)$/, /^[\-–]£\.?[0-9][0-9,\.]*$/]
         },
         {
-          show: '€', // Euro
+          showBefore: '€', // Euro
+          showAfter: '',
           pos: [/^€\.?[0-9][0-9,\.]*$/],
           neg: [/^\(€\.?[0-9][0-9,\.]*\)$/, /^[\-–]€\.?[0-9][0-9,\.]*$/]
         },
         {
-          show: '¥', // Yen
+          showBefore: '',
+          showAfter: '¥', // Yen
           pos: [/^\.?[0-9][0-9,\.]*¥[\.,]?$/, /^¥\.?[0-9][0-9,\.]*$/],
           neg: [/^\(\.?[0-9][0-9,\.]*¥[\.,]?\)$/, /^[\-–]\.?[0-9][0-9,\.]*¥[\.,]?$/, /^\(¥\.?[0-9][0-9,\.]*\)$/, /^[\-–]¥\.?[0-9][0-9,\.]*$/]
         },
         {
-          show: '', // plain numbers
+          showBefore: '', // plain numbers
+          showAfter: '',
           pos: [/^\.?[0-9][0-9,\.]*$/],
           neg: [/^\(\.?[0-9][0-9,\.]+\)$/, /^[\-–]\.?[0-9][0-9,\.]+$/]
         }
@@ -167,7 +172,7 @@
       var len = arr[i].length;
       if(len) {
         for(var j = 0, sum = 0; j < len; j++) sum += arr[i][j];
-        totals.push(sumter.config.regexes[i].show + roundNumber(sum));
+        totals.push(sumter.config.regexes[i].showBefore + roundNumber(sum)) + sumter.config.regexes[i].showAfter;
         total += sum;
       }
     }
