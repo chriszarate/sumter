@@ -226,4 +226,7 @@
   document.onkeydown = captureSelection;
   document.onkeyup = captureSelection;
 
+  // This is awful, but touch text selection events are impossible to capture.
+  document.ontouchstart = function(e) { window.setInterval(captureSelection, 100); };
+
 })();
