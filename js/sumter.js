@@ -141,17 +141,14 @@
     // Grab text selection.
     var sel = grabSelection();
 
-    // Parse text.
+    // Parse selection.
     if(sel !== '') {
       if(sel !== sumter.selection) {
         sumter.hud.nodeValue = sumter.total = tallyTotal(processText(sel, []));
         sumter.selection = sel + '';
       }
-      return false;
-    }
-
-    // empty selection or selection too young : RESET
-    if(sumter.total !== sumter.config.title) {
+    } else if(sumter.total !== sumter.config.title) {
+      // Reset.
       sumter.hud.nodeValue = sumter.total = sumter.config.title;
     }
 
