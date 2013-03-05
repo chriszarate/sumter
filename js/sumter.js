@@ -116,7 +116,7 @@
 
   // Round a number. *Glares at parseFloat.*
   function roundNumber(num) {
-    return Math.round(num * sumter.config.rounder) / rounder;
+    return Math.round(num * sumter.config.rounder) / sumter.config.rounder;
   }
 
   // Tally a final total.
