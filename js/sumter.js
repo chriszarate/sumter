@@ -172,4 +172,6 @@
     window.setInterval(captureSelection, 100);
   };
 
+  captureSelection();
+
 })();
