@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=830">
+
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet" type="text/css">
+    <link href="css/sumter.css" rel="stylesheet" type="text/css">
+    
+    <title>Sumter</title>
+
+  </head>
+
+  <body>
+
+    <h1>Sumter</h1>
+
+    <p>Sumter is a bookmarklet that sums up all the numbers in your text selection. Drag it to your bookmarks bar!</p>
+    <p>&gt;&gt; <a class="btn btn-success" href="javascript:(function()%7B;var%20a=document.createElement(%22script%22);a.setAttribute(%22src%22,%22//d391j46upa8a0p.cloudfront.net/js/sumter.js?20130305%22),document.getElementsByTagName(%22head%22)%5B0%5D.appendChild(a);;%7D)()"><strong>Sumter</strong></a> &lt;&lt;</p>
+    <p>It can also be embedded into pages (like this one).</p>
+
+    <h2>Typical Use</h2>
+    <p>I sometimes find myself wishing I could quickly add up some numbers on a Web page without transferring them to a spreadsheet. The most common example is when I'm reading a credit card statement online:</p>
+
+    <table class="table">
+    <thead>
+    <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th align="right">Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>03/01/2013</td>
+    <td>B&amp;H DAIRY LUNCH</td>
+    <td align="right">$12.49</td>
+    </tr>
+    <tr>
+    <td>02/28/2013</td>
+    <td>MTA VENDING</td>
+    <td align="right">$104.00</td>
+    </tr>
+    <tr>
+    <td>02/26/2013</td>
+    <td>AMAZON WEB SERVICES</td>
+    <td align="right">$0.25</td>
+    </tr>
+    <tr>
+    <td>02/26/2013</td>
+    <td>ABC BEER CO</td>
+    <td align="right">$18.17</td>
+    </tr>
+    <tr>
+    <td>02/20/2013</td>
+    <td>MUJI</td>
+    <td align="right">$25.11</td>
+    </tr>
+    <tr>
+    <td>02/18/2013</td>
+    <td>PRET A MANGER</td>
+    <td align="right">$6.93</td>
+    </tr>
+    <tr>
+    <td>02/17/2013</td>
+    <td>ASSOCIATED SUPERMARKET</td>
+    <td align="right">$40.72</td>
+    </tr>
+    <tr>
+    <td>02/03/2013</td>
+    <td>NETFLIX.COM</td>
+    <td align="right">$7.99</td>
+    </tr>
+    <tr>
+    <td>01/30/2013</td>
+    <td>UTRECHT ART SUPPLIES</td>
+    <td align="right">$19.40</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <p>I'd really like to know how much I spent in February. Sumter lets me highlight the numbers I'm interested in and a total is displayed in the upper right-hand corner of the page.</p>
+
+    <div class="alert alert-success">
+      <p><strong>Highlight some numbers!</strong> Sumter is built-in to this page.</div>
+    </div>
+
+    <h2>Multiple currencies</h2>
+
+    <p>Sumter can also handle select other currencies (detection is improving) and raw numbers. It will keep the totals separate.</p>
+
+    <table class="table">
+    <thead>
+    <tr>
+    <th align="right">Dollar $</th>
+    <th align="right">Pound £</th>
+    <th align="right">Euro €</th>
+    <th align="right">Yen ¥</th>
+    <th align="right">Raw</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td align="right">$23.04</td>
+    <td align="right">£34</td>
+    <td align="right">€12.75</td>
+    <td align="right">700¥</td>
+    <td align="right">3,478</td>
+    </tr>
+    <tr>
+    <td align="right">$17.89</td>
+    <td align="right">£15.</td>
+    <td align="right">€352.10</td>
+    <td align="right">¥1,200</td>
+    <td align="right">1883</td>
+    </tr>
+    <tr>
+    <td align="right">$3.51</td>
+    <td align="right">£32.50</td>
+    <td align="right">€25.63</td>
+    <td align="right">235¥</td>
+    <td align="right">23.14</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <p>It adds each total together for a grand total but doesn't convert currencies.</p>
+
+    <h2>No dependencies</h2>
+    <p>Sumter is plain JavaScript and does not require any libraries. It should work in most modern browsers.</p>
+
+    <h2>Issues</h2>
+    <p>Sumter is new. Let me know how it can be improved by <a href="https://github.com/chriszarate/Sumter/issues">opening an issue on GitHub</a>.</p>
+
+    <h2>License</h2>
+    <p>This is free software. It is released to the public domain without warranty.</p>
+    <p><a href="https://github.com/chriszarate/Sumter">Download the source on GitHub.</a></p>
+
+
+
+    <div><a href="https://github.com/chriszarate/Sumter"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a></div>
+
+    <script src="js/sumter.min.js"></script>
+
+  </body>
+
+</html>
