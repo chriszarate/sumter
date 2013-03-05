@@ -7,7 +7,10 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    meta: { name: 'Sumter' },
+    meta: {
+      name: 'Sumter',
+      hostedURL: '//d391j46upa8a0p.cloudfront.net/js/sumter.js'
+    },
 
     jshint: {
       all: ['js/sumter.js']
@@ -16,15 +19,23 @@ module.exports = function(grunt) {
     uglify: {
       all: {
         files: {
-          'build/sumter.js': ['js/sumter.js']
+          'build/sumter.js': ['js/sumter.js'],
+          'build/bookmarklet-hosted.js': ['js/sumter.bookmarklet.js']
         }
       }
     },
 
     bookmarklet: {
-      all: {
+      inline: {
+        options: { anonymize: false },
         files: {
-          'build/sumter.bookmarklet.js': ['js/sumter.bookmarklet.js']
+          'build/bookmarklet.js': ['build/sumter.js']
+        }
+      },
+      hosted: {
+        options: { isTemplate: true },
+        files: {
+          'build/bookmarklet-hosted.js': ['build/bookmarklet-hosted.js']
         }
       }
     }
@@ -37,9 +48,11 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('bookmarklet', 'Generate bookmarklet', function() {
 
-    var bookmarkletify = require('bookmarkletify'),
-        cacheBustFlag = new RegExp('\\?updated', 'g'),
-        cacheBust = grunt.template.today('?yyyymmdd');
+    // Merge task-specific and/or target-specific options with these defaults.
+    var options = this.options({
+      anonymize: true,
+      isTemplate: false
+    });
 
     this.files.forEach(function(file) {
 
@@ -56,11 +69,17 @@ module.exports = function(grunt) {
         return grunt.file.read(filepath);
       }).join('');
 
-      // Provide cache-busting query string.
-      contents = contents.replace(cacheBustFlag, cacheBust);
+      // Process script as template.
+      if(options.isTemplate) contents = grunt.template.process(contents);
+
+      // Wrap in anonymous function.
+      if(options.anonymize) contents = '(function(){;' + contents + ';})()';
+
+      // Encode as URI.
+      contents = encodeURI('javascript:' + contents);
 
       // Write joined contents to destination filepath.
-      grunt.file.write(file.dest, bookmarkletify(contents));
+      grunt.file.write(file.dest, contents);
       grunt.log.writeln('Created bookmarklet: ' + file.dest);
 
     });
