@@ -219,7 +219,7 @@
 
   // Capture mouse and key events.
   document.onmouseup = function(e) {
-    document.onmousemove = function(){};
+    document.onmousemove = null;
     window.setTimeout(captureSelection, 100);
   };
   document.onmousedown = function(e) { document.onmousemove = captureSelection; };
@@ -227,6 +227,9 @@
   document.onkeyup = captureSelection;
 
   // This is awful, but touch text selection events are impossible to capture.
-  document.ontouchstart = function(e) { window.setInterval(captureSelection, 100); };
+  document.ontouchstart = function(e) {
+    document.ontouchstart = null;
+    window.setInterval(captureSelection, 100);
+  };
 
 })();
