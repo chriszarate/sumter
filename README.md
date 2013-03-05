@@ -20,6 +20,8 @@ I often find myself wishing I could quickly add up some numbers on a Web page wi
 
 I'd really like to know how much I spent in February. Sumter lets me highlight the numbers I'm interested in and a total is displayed in the upper right-hand corner of the page.
 
+## Multiple Currencies
+
 Sumter can also handle select other currencies (detection is improving) and raw numbers. It will keep the totals separate.
 
 | Dollar $  | Pound £  | Euro €   | Yen ¥    | Raw      |
@@ -30,7 +32,7 @@ Sumter can also handle select other currencies (detection is improving) and raw 
 
 It adds each total together for a grand total but doesn't convert currencies.
 
-## No dependencies
+## No Dependencies
 Sumter is plain JavaScript and does not require any libraries. It should work in most modern browsers.
 
 ## Issues
