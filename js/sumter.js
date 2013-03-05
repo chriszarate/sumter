@@ -47,17 +47,17 @@
       round: 2,
       // CSS styles for total box.
       styles: [
-        'position: fixed;',
-        'top: 0;',
-        'right: 20px;',
-        'padding: 5px 10px;',
-        'color: #333;',
-        'background-color: #ff0;',
-        'font-family: Helvetica, Arial, sans-serif;',
-        'font-weight: bold;',
-        'font-size: 16px;',
-        'opacity: 0.9;',
-        'z-index: 9999;'
+        'position:fixed;',
+        'top:0;',
+        'right:20px;',
+        'padding:5px 10px;',
+        'color:#333;',
+        'background-color:#ff0;',
+        'font-family:Helvetica,Arial,sans-serif;',
+        'font-weight:bold;',
+        'font-size:16px;',
+        'opacity:0.9;',
+        'z-index:9999;'
       ]
     },
     // Placeholder for current selection
@@ -149,7 +149,6 @@
     return totals;
   }
 
-
   // Lazy Range object detection.
   function isRange(obj) {
     return ('type' in obj && obj.type === 'Range');
@@ -186,7 +185,6 @@
 
     // Grab text selection.
     var sel = grabSelection();
-
 
     // Test for something usable.
     switch(typeof sel) {
