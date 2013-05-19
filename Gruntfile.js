@@ -1,6 +1,6 @@
 /*
  * Sumter
- * https://github.com/chriszarate/Sumter
+ * https://github.com/chriszarate/sumter
  */
 
 module.exports = function(grunt) {

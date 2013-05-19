@@ -1,7 +1,7 @@
 Sumter
 ======
 
-Sumter is a bookmarklet that sums up all the numbers in your text selection. It can also be embedded into pages. [**Try the demo!**](http://chriszarate.github.com/Sumter/)
+Sumter is a bookmarklet that sums up all the numbers in your text selection. It can also be embedded into pages. [**Try the demo!**](http://chriszarate.github.io/sumter/)
 
 ## Typical Use
 I often find myself wishing I could quickly add up some numbers on a Web page without transferring them to a spreadsheet. The most common example is when I'm reading a credit card statement online:
@@ -36,7 +36,7 @@ It adds each total together for a grand total but doesn't convert currencies.
 Sumter is plain JavaScript and does not require any libraries. It should work in most modern browsers.
 
 ## Issues
-Sumter is new. Let me know how it can be improved by [opening an issue](https://github.com/chriszarate/Sumter/issues).
+Sumter is new. Let me know how it can be improved by [opening an issue](https://github.com/chriszarate/sumter/issues).
 
 ## License
 This is free software. It is released to the public domain without warranty.
